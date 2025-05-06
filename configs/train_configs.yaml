@@ -1,5 +1,5 @@
 # configs/train_config.yaml
-model_name_or_path: Qwen/Qwen-1.8B
+model_name_or_path: Qwen/Qwen-1_8B-Chat
 lora: true  # true = LoRA 微调, false = 全量微调
 output_dir: ./output_qwen
 
@@ -8,6 +8,8 @@ train_batch_size: 1
 eval_batch_size: 1
 learning_rate: 2e-5
 num_train_epochs: 3
+report_to: "tensorboard"    
+logging_dir: "./logs"  
 logging_steps: 10
 save_steps: 200
 eval_steps: 200

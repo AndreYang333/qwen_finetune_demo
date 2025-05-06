@@ -7,3 +7,4 @@ torch>=2.0.0
 sentencepiece
 scipy
 pyyaml
+tensorboard>=2.12.0
