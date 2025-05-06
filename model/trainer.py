@@ -18,6 +18,11 @@ def load_model_and_tokenizer(model_name, lora, lora_cfg):
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True, torch_dtype=torch.bfloat16)
 
+    # ✅ 修复 pad_token 问题
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+        print("✅ tokenizer.pad_token 设置为 eos_token")
+
     if lora:
         model = prepare_model_for_kbit_training(model)
         peft_config = LoraConfig(**lora_cfg)
@@ -25,6 +30,7 @@ def load_model_and_tokenizer(model_name, lora, lora_cfg):
         model.print_trainable_parameters()
 
     return model, tokenizer
+
 
 
 

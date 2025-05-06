@@ -6,6 +6,12 @@ class SupervisedDataset(Dataset):
     def __init__(self, jsonl_file: str, tokenizer: PreTrainedTokenizer, max_length: int = 1024):
         self.tokenizer = tokenizer
         self.max_length = max_length
+
+        # ✅ 补丁：确保 pad_token 设置好
+        if self.tokenizer.pad_token is None:
+            print("✅ tokenizer.pad_token 在 Dataset 中设置为 eos_token")
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+
         with open(jsonl_file, 'r', encoding='utf-8') as f:
             self.data = [json.loads(line) for line in f]
 

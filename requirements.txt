@@ -8,3 +8,5 @@ sentencepiece
 scipy
 pyyaml
 tensorboard>=2.12.0
+tiktoken
+transformers_stream_generator
